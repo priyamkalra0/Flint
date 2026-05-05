@@ -29,13 +29,15 @@ class Files():
     # (key: hash [str], value: file [bytes])
     hash_to_bytes: dict[str, bytes]
 
-    def populate_recv(self, path: Path):
+    def populate_recv(self, path: Path, root: Path | None = None):
+        if root is None: root = path
+
         for f in path.iterdir():
             if f.is_dir():
-                self.populate_recv(f)
+                self.populate_recv(f, root)
                 continue
 
-            relpath = f.relative_to(path).as_posix()
+            relpath = f.relative_to(root).as_posix()
 
             bytes_ = f.read_bytes()
             compressed_bytes = gzip.compress(bytes_)
@@ -141,7 +143,7 @@ class Firebase():
             
             current_file_idx += 1
             print(f"[{current_file_idx}/{file_count} file_uploaded] {hash}")
-
+            
         ## Step 5: Mark version as FINAL
         resp = requests.patch(
             f"https://firebasehosting.googleapis.com/v1beta1/sites/{self.site}/versions/{version_id}",
