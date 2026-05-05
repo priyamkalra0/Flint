@@ -33,6 +33,7 @@ class Files():
         if root is None: root = path
 
         for f in path.iterdir():
+            if f.name.startswith("."): continue
             if f.is_dir():
                 self.populate_recv(f, root)
                 continue
