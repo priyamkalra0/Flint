@@ -1,10 +1,10 @@
-# Firedeploy: Quickly and easily deploy static websites to [Firebase](https://web.app)
+# Flint: Simple & dumb python client around Google's Firebase API: Deploy to app-hosting with almost zero setup.
 ## Usage
 The `firebase-admin` and `requests` packages must be installed beforehand.    
 The tool is not yet available as a package, so you need to manually download and include it in your project, after that it can be used as such:
 
 ```py
-from firedeploy import Firebase, Certificate
+from flint import Firebase, Certificate
 certificate = Certificate({
     "type": "service_account",
     "token_uri": "https://oauth2.googleapis.com/token",
