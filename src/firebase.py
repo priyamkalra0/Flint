@@ -93,8 +93,8 @@ class Firebase():
 
         ## Step 1: Obtain access token from certificate
         # We already have the token set as a property
-        # so we'll just log the first 4 chars to show that
-        print(f"Access token: {self.token[:4]}XXXXXXX")
+        # so we'll just log the last 4 chars to show that
+        print(f"Access token: XXXXXXX{self.token[-4:]}")
 
         ## Step 2: Prepare a new version for deployment
         resp = requests.post(
