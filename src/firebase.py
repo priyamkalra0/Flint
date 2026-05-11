@@ -126,7 +126,7 @@ class Firebase():
         _hash_to_path = {v: k for k, v in files.path_to_hash.items()}
 
         ## Step 4: Upload files
-        file_count = len(files.path_to_hash)
+        file_count = len(content["uploadRequiredHashes"])
         current_file_idx = 0
         metadata = json.loads(resp.content)
         for hash in content["uploadRequiredHashes"]:
