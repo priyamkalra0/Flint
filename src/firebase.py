@@ -123,6 +123,8 @@ class Firebase():
         if resp.status_code != 200:
             return print(f"[failed_to_populate_files] {FirebaseError(**content['error'])}")
 
+        _hash_to_path = {v: k for k, v in files.path_to_hash.items()}
+
         ## Step 4: Upload files
         file_count = len(files.path_to_hash)
         current_file_idx = 0
@@ -143,7 +145,7 @@ class Firebase():
                 return print(f"[failed_to_upload_files] {FirebaseError(**content['error'])}")
             
             current_file_idx += 1
-            print(f"[{current_file_idx}/{file_count} file_uploaded] {hash}")
+            print(f"[{current_file_idx}/{file_count} file_uploaded] {_hash_to_path[hash]}, {hash}")
             
         ## Step 5: Mark version as FINAL
         resp = requests.patch(
